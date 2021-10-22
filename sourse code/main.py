@@ -13,7 +13,8 @@ var12 = InitialValueProblem(ODE=lambda x,y: 5 - (y - x) ** 2, # y' = f(x,y)
                             latexGeneralSolution=r'$y(x)=\frac{1}{Ce^{4x}-\frac{1}{4}}+x+2$',
                             # Latex expression is separated in place where constant C should be substituted
                             latexExact1=r'$y(x)=\frac{1}{', # Here value of C will bw placed
-                            latexExact2=r'e^{4x}-\frac{1}{4}}+x+2$') # Remaining part of the string after C
+                            latexExact2=r'e^{4x}-\frac{1}{4}}+x+2$', # Remaining part of the string after C
+                            exception='C does not exist if\n y0 - x0 = 2')
 
 # To start application the user needs to create
 # an instance of class GUI initialized by InitialValueProblem

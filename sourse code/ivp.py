@@ -2,10 +2,9 @@ import numpy as np
 
 
 class InitialValueProblem:
-
     def __init__(self, ODE, findParameterC, generalSolution, x0, y0, X, N, 
-                 latexODE=None, latexGeneralSolution=None, latexExact1=None, latexExact2=None):
-
+                 latexODE=None, latexGeneralSolution=None, latexExact1=None, latexExact2=None,
+                 exception=None):
         # Lambda expression containing ODE
         self._ODE = ODE
         # Lambda expression of general solution with expressed C parameter via x and y
@@ -26,10 +25,11 @@ class InitialValueProblem:
         self._latexGeneralSolution = latexGeneralSolution
         self._latexExact1 = latexExact1
         self._latexExact2 = latexExact2
+        # Warning string about non-existance points
+        self._exception = exception
 
     def recompute(self, x0, y0, X, N):
         """Recomputes IVP for new initial conditions"""
-
         self._C = self._findParameterC(x0, y0)
         self._x0 = x0
         self._y0 = y0
@@ -43,7 +43,6 @@ class InitialValueProblem:
         Recomputes values for changed N
         It is needed for printing global errors graphs
         """
-
         self._N = N
         self._xArray = np.linspace(self._x0, self._X, N + 1)
         self._analyticalYArray = np.array([self._generalSolution(x, self._C) for x in self._xArray])
@@ -90,3 +89,6 @@ class InitialValueProblem:
 
     def getLatexExact2(self):
         return self._latexExact2
+
+    def getException(self):
+        return self._exception

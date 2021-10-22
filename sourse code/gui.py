@@ -12,7 +12,6 @@ class GUI:
     Main class of the application
     It runs graphical user interface
     """
-
     def __init__(self, IVP: InitialValueProblem):
         self._IVP = IVP
 
@@ -20,14 +19,15 @@ class GUI:
 
         tab1Col1 = sg.Column([[sg.Frame('Variant 12', [[sg.Canvas(key="-CANVAS1-")]])]])
 
-        tab1Col2 = sg.Column([[sg.Frame('Parameters', [[sg.Text("x0"), sg.Input(key='-x0-', default_text=self._IVP.getX0(), size=(10, None))],
+        tab1Col2 = sg.Column([[sg.Text(self._IVP.getException())],
+                              [sg.Frame('Parameters', [[sg.Text("x0"), sg.Input(key='-x0-', default_text=self._IVP.getX0(), size=(10, None))],
                                                        [sg.Text("y0"), sg.Input(key='-y0-', default_text=self._IVP.getY0(), size=(10, None))],
                                                        [sg.Text("X "), sg.Input(key='-X-', default_text=self._IVP.getX(), size=(10, None))],
                                                        [sg.Text("N "), sg.Input(key='-N-', default_text=self._IVP.getN(), size=(10, None))]])],
                               [sg.Button('Apply', key='-apply1-')],
-                              [sg.Frame('Show', [[sg.Checkbox(text='Euler Method', key='-EM1-', default=True, enable_events=True)],
-                                                 [sg.Checkbox(text='Improved Euler Method', key='-IEM1-', default=True, enable_events=True)],
-                                                 [sg.Checkbox(text='Runge-Kutta', key='-RK1-', default=True, enable_events=True)],
+                              [sg.Frame('Show', [[sg.Checkbox(text="Euler's Method", key='-EM1-', default=True, enable_events=True)],
+                                                 [sg.Checkbox(text="Improved Euler's Method", key='-IEM1-', default=True, enable_events=True)],
+                                                 [sg.Checkbox(text='Runge-Kutta Method', key='-RK1-', default=True, enable_events=True)],
                                                  [sg.Checkbox(text='Exact Solution', key='-ES1-', default=True, enable_events=True)]])]])
         # Layout for the first page                                                                                                                        
         tab1Layout = [[tab1Col1, tab1Col2]]
@@ -38,9 +38,9 @@ class GUI:
         tab2Col2 = sg.Column([[sg.Frame('Parameters', [[sg.Text("min N"), sg.Input(key='-minN-', default_text=self._IVP.getN(), size=(10, None))],
                                                        [sg.Text("max N"), sg.Input(key='-maxN-', default_text=self._IVP.getN() + 100, size=(10, None))]])],
                               [sg.Button('Apply', key='-apply2-')],
-                              [sg.Frame('Show', [[sg.Checkbox(text='Euler Method', key='-EM2-', default=True, enable_events=True)],
-                                                 [sg.Checkbox(text='Improved Euler Method', key='-IEM2-', default=True, enable_events=True)],
-                                                 [sg.Checkbox(text='Runge-Kutta', key='-RK2-', default=True, enable_events=True)]])]])
+                              [sg.Frame('Show', [[sg.Checkbox(text="Euler's Method", key='-EM2-', default=True, enable_events=True)],
+                                                 [sg.Checkbox(text="Improved Euler's Method", key='-IEM2-', default=True, enable_events=True)],
+                                                 [sg.Checkbox(text='Runge-Kutta Method', key='-RK2-', default=True, enable_events=True)]])]])
         # Layout for second page
         tab2Layout = [[tab2Col1, tab2Col2]]
 
