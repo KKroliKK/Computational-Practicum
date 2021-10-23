@@ -16,17 +16,21 @@ class InitialValueProblem:
         self._y0 = y0
         self._X = X
         self._N = N
-        # Array of computed x-grid
-        self._xArray = np.linspace(x0, X, N + 1)
-        # Array of computed exact y-values
-        self._analyticalYArray = np.array([self._generalSolution(x, self._C) for x in self._xArray])
+        self._createArrays()
         # Latex strings for graph printing
         self._latexODE = latexODE
         self._latexGeneralSolution = latexGeneralSolution
         self._latexExact1 = latexExact1
         self._latexExact2 = latexExact2
-        # Warning string about non-existance points
+        # String for showing warnings for user in GUI
         self._exception = exception
+
+    def _createArrays(self):
+        """This method can be extended to avoid discontinuity points"""
+        # Array of computed x-grid
+        self._xArray = np.linspace(self._x0, self._X, self._N + 1)
+        # Array of computed exact y-values
+        self._analyticalYArray = np.array([self._generalSolution(x, self._C) for x in self._xArray])
 
     def recompute(self, x0, y0, X, N):
         """Recomputes IVP for new initial conditions"""
@@ -35,8 +39,7 @@ class InitialValueProblem:
         self._y0 = y0
         self._X = X
         self._N = N
-        self._xArray = np.linspace(x0, X, N + 1)
-        self._analyticalYArray = np.array([self._generalSolution(x, self._C) for x in self._xArray])
+        self._createArrays()
 
     def recomputeForN(self, N):
         """
@@ -44,8 +47,7 @@ class InitialValueProblem:
         It is needed for printing global errors graphs
         """
         self._N = N
-        self._xArray = np.linspace(self._x0, self._X, N + 1)
-        self._analyticalYArray = np.array([self._generalSolution(x, self._C) for x in self._xArray])
+        self._createArrays()
         return self
 
     def getODE(self, x, y):
